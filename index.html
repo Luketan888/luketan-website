@@ -1,46 +1,86 @@
-<script>
-document.getElementById('claimForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claim Form</title>
+</head>
+<body>
 
-    // Get the form data values
-    const name = document.getElementById('name').value;
-    const sex = document.getElementById('sex').value;
-    const age = document.getElementById('age').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+  <!-- Form for submitting claims -->
+  <form id="claimForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+    <br>
+    
+    <label for="sex">Sex:</label>
+    <input type="text" id="sex" required>
+    <br>
 
-    // Cloudflare Worker URL (your actual Worker URL)
-    const cloudflareWorkerURL = 'https://luketan-proxy.yongleng1989.workers.dev';  // <-- Your Cloudflare Worker URL
+    <label for="age">Age:</label>
+    <input type="number" id="age" required>
+    <br>
 
-    // Create a data object to send to the Cloudflare Worker
-    const formData = {
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+    <br>
+
+    <label for="message">Message:</label>
+    <textarea id="message" required></textarea>
+    <br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="confirmationMessage"></p>
+
+  <!-- JavaScript to handle form submission -->
+  <script>
+    document.getElementById('claimForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Get the form data values
+      const name = document.getElementById('name').value;
+      const sex = document.getElementById('sex').value;
+      const age = document.getElementById('age').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      // Cloudflare Worker URL (your actual Worker URL)
+      const cloudflareWorkerURL = 'https://luketan-proxy.yongleng1989.workers.dev';  // <-- Your Cloudflare Worker URL
+
+      // Create a data object to send to the Cloudflare Worker
+      const formData = {
         name: name,
         sex: sex,
         age: age,
         email: email,
         message: message,
-    };
+      };
 
-    // Send the form data to Cloudflare Worker
-    fetch(cloudflareWorkerURL, {
+      // Send the form data to Cloudflare Worker
+      fetch(cloudflareWorkerURL, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),  // Convert form data to JSON format
-    })
-    .then(response => response.json())
-    .then(data => {
+      })
+      .then(response => response.json())
+      .then(data => {
         // Handle success or failure response from Cloudflare Worker
         if (data.status === 'success') {
-            document.getElementById('confirmationMessage').textContent = "Your claim has been submitted successfully!";
-            document.getElementById('claimForm').reset(); // Clear the form after submission
+          document.getElementById('confirmationMessage').textContent = "Your claim has been submitted successfully!";
+          document.getElementById('claimForm').reset(); // Clear the form after submission
         } else {
-            document.getElementById('confirmationMessage').textContent = "Error: Unable to send the message.";
+          document.getElementById('confirmationMessage').textContent = "Error: Unable to send the message.";
         }
-    })
-    .catch(error => {
+      })
+      .catch(error => {
         document.getElementById('confirmationMessage').textContent = "Error: Unable to connect to the server.";
+      });
     });
-});
-</script>
+  </script>
+
+</body>
+</html>
