@@ -18,11 +18,18 @@
       color: white;
       padding: 20px 0;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
     header h1 {
       margin: 0;
       font-size: 2.5em;
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      animation: float 2s infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
     .container {
       max-width: 900px;
@@ -32,6 +39,10 @@
       box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
       border-radius: 15px;
       text-align: center;
+    }
+    .form-description {
+      font-size: 1.2em;
+      margin-bottom: 20px;
     }
     .form-field {
       width: 90%;
@@ -57,16 +68,17 @@
       background-color: #e58900;
       transform: scale(1.05);
     }
+    .confirmation-message {
+      margin-top: 30px;
+      color: green;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
     footer {
       text-align: center;
       margin-top: 30px;
       font-size: 1em;
       color: #777;
-    }
-    .disclaimer {
-      font-size: 0.9em;
-      color: #555;
-      margin-top: 20px;
     }
   </style>
 </head>
@@ -78,7 +90,7 @@
 
 <div class="container">
   <p class="form-description">
-    Share your details to claim this gift — potentially a free Haidilao meal! 🥳
+    Zhi Quan is a generous benefactor offering a free meal to those in need. Share your details to claim this gift — potentially a free Haidilao meal! 🥳
   </p>
 
   <!-- Form for user details -->
@@ -97,9 +109,10 @@
     <button type="submit">Claim Your Free Meal</button>
   </form>
 
-  <!-- Disclaimer text -->
-  <p class="disclaimer">
-    To be eligible for the free meal, please mention 'HuatBigBig' in person.
+  <!-- Confirmation message -->
+  <p id="confirmationMessage" class="confirmation-message" style="display: none;">
+    Your claim has been submitted successfully! <br>
+    To be eligible for the free meal, please mention 'HuatBigBig' to Zhi Quan in person.
   </p>
 </div>
 
@@ -138,8 +151,8 @@
 
       const result = await response.json();
       if (result.status === 'success') {
-        alert('Your claim has been submitted successfully!');
         document.getElementById('claimForm').reset(); // Reset form fields
+        document.getElementById('confirmationMessage').style.display = 'block';
       } else {
         alert(`Error: ${result.message}`);
       }
