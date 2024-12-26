@@ -68,11 +68,15 @@
       background-color: #e58900;
       transform: scale(1.05);
     }
-    .confirmation-message {
-      margin-top: 30px;
-      color: green;
+    .message-box {
+      display: none;
+      background-color: #e8ffe8;
+      color: #2a7a2a;
+      border: 2px solid #2a7a2a;
+      padding: 20px;
       font-size: 1.2em;
-      font-weight: bold;
+      margin-top: 30px;
+      border-radius: 10px;
     }
     footer {
       text-align: center;
@@ -109,11 +113,11 @@
     <button type="submit">Claim Your Free Meal</button>
   </form>
 
-  <!-- Confirmation message -->
-  <p id="confirmationMessage" class="confirmation-message" style="display: none;">
+  <!-- Message Box -->
+  <div id="messageBox" class="message-box">
     Your claim has been submitted successfully! <br>
     To be eligible for the free meal, please mention 'HuatBigBig' to Zhi Quan in person.
-  </p>
+  </div>
 </div>
 
 <footer>
@@ -152,7 +156,7 @@
       const result = await response.json();
       if (result.status === 'success') {
         document.getElementById('claimForm').reset(); // Reset form fields
-        document.getElementById('confirmationMessage').style.display = 'block';
+        document.getElementById('messageBox').style.display = 'block'; // Show message box
       } else {
         alert(`Error: ${result.message}`);
       }
