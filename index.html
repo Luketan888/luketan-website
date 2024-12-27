@@ -12,29 +12,30 @@
       padding: 0;
       background: linear-gradient(to right, #6a11cb, #2575fc);
       color: #333;
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
     }
     .container {
       background: #ffffff;
-      padding: 30px;
+      padding: 20px;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
       border-radius: 15px;
-      max-width: 600px;
-      width: 90%;
+      max-width: 90%;
+      width: 100%;
       text-align: center;
-      position: relative;
+      margin: 0 auto;
     }
     header h1 {
-      margin: 0;
-      font-size: 2.5em;
+      margin: 0 0 20px;
+      font-size: 2em;
       color: #6a11cb;
       font-weight: 700;
     }
     .form-description {
-      font-size: 1.2em;
+      font-size: 1em;
       color: #666;
       margin-bottom: 20px;
     }
@@ -42,21 +43,22 @@
       width: 100%;
       padding: 12px;
       font-size: 1em;
-      margin-top: 15px;
+      margin-top: 10px;
       border: 1px solid #ddd;
       border-radius: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       box-sizing: border-box;
     }
     button {
       background-color: #6a11cb;
       color: white;
       border: none;
-      padding: 15px 30px;
-      font-size: 1.2em;
+      padding: 15px 20px;
+      font-size: 1em;
       cursor: pointer;
       border-radius: 5px;
       transition: all 0.3s ease;
+      width: 100%;
     }
     button:hover {
       background-color: #2575fc;
@@ -68,40 +70,42 @@
       color: #2a7a2a;
       border: 2px solid #2a7a2a;
       padding: 20px;
-      font-size: 1.2em;
-      margin-top: 30px;
+      font-size: 1em;
+      margin-top: 20px;
       border-radius: 10px;
     }
     footer {
-      margin-top: 20px;
       font-size: 0.9em;
       color: #999;
-      position: absolute;
-      bottom: -50px;
-      left: 50%;
-      transform: translateX(-50%);
+      margin-top: 20px;
+      text-align: center;
     }
+    
     /* Responsive Design */
-    @media (max-width: 768px) {
+    @media (min-width: 768px) {
+      .container {
+        padding: 30px;
+        max-width: 600px;
+      }
       header h1 {
-        font-size: 2em;
+        font-size: 2.5em;
       }
       button {
-        font-size: 1em;
+        font-size: 1.2em;
       }
-      .container {
-        padding: 20px;
+      .form-description {
+        font-size: 1.2em;
       }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Contact Me</h1>
-</header>
-
 <div class="container">
+  <header>
+    <h1>Contact Me</h1>
+  </header>
+
   <p class="form-description">
     If you would like to contact me, please fill up the form below with your details.
   </p>
@@ -128,7 +132,7 @@
   </div>
 
   <footer>
-    <p>&copy; 2024 Contact Me | All Rights Reserved</p>
+    <p>© 2024 Contact Me | All Rights Reserved</p>
   </footer>
 </div>
 
