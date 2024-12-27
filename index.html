@@ -54,6 +54,13 @@
       margin-bottom: 20px;
       box-sizing: border-box;
     }
+    .form-row {
+      display: flex;
+      justify-content: space-between;
+    }
+    .form-row .form-field {
+      width: 48%;
+    }
     button {
       background-color: #ff9800;
       color: white;
@@ -100,7 +107,18 @@
   <!-- Contact Form -->
   <form id="contactForm">
     <input type="text" id="name" class="form-field" placeholder="Your Name" required>
-    <input type="text" id="contactNumber" class="form-field" placeholder="Your Contact Number" required>
+
+    <select id="sex" class="form-field" required>
+      <option value="">Select Sex</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+
+    <div class="form-row">
+      <input type="text" id="countryCode" class="form-field" placeholder="Country Code (e.g., +1)" required>
+      <input type="text" id="phoneNumber" class="form-field" placeholder="Phone Number" required>
+    </div>
+
     <input type="email" id="email" class="form-field" placeholder="Your Email Address" required>
     <textarea id="message" class="form-field" placeholder="Your Message" rows="4" required></textarea>
 
@@ -122,13 +140,21 @@
     e.preventDefault();
 
     const name = document.getElementById('name').value.trim();
-    const contactNumber = document.getElementById('contactNumber').value.trim();
+    const sex = document.getElementById('sex').value;
+    const countryCode = document.getElementById('countryCode').value.trim();
+    const phoneNumber = document.getElementById('phoneNumber').value.trim();
     const email = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
 
-    // Validate contact number (digits only, 8-15 digits)
-    if (!/^[0-9]{8,15}$/.test(contactNumber)) {
-      alert('Please enter a valid contact number (8-15 digits).');
+    // Validate country code (e.g., + followed by 1-3 digits)
+    if (!/^\+\d{1,3}$/.test(countryCode)) {
+      alert('Please enter a valid country code (e.g., +1).');
+      return;
+    }
+
+    // Validate phone number (digits only, 8-15 digits)
+    if (!/^\d{8,15}$/.test(phoneNumber)) {
+      alert('Please enter a valid phone number (8-15 digits).');
       return;
     }
 
@@ -142,7 +168,7 @@
       const response = await fetch('https://luketan-proxy.yongleng1989.workers.dev/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, contactNumber, email, message }),
+        body: JSON.stringify({ name, sex, countryCode, phoneNumber, email, message }),
       });
 
       const result = await response.json();
