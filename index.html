@@ -25,6 +25,7 @@
       max-width: 600px;
       width: 90%;
       text-align: center;
+      position: relative;
     }
     header h1 {
       margin: 0;
@@ -75,6 +76,10 @@
       margin-top: 20px;
       font-size: 0.9em;
       color: #999;
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
     }
     /* Responsive Design */
     @media (max-width: 768px) {
@@ -83,6 +88,9 @@
       }
       button {
         font-size: 1em;
+      }
+      .container {
+        padding: 20px;
       }
     }
   </style>
@@ -118,11 +126,11 @@
   <div id="messageBox" class="message-box">
     Your message has been sent successfully! Thank you for reaching out.
   </div>
-</div>
 
-<footer>
-  <p>&copy; 2024 Contact Me | All Rights Reserved</p>
-</footer>
+  <footer>
+    <p>&copy; 2024 Contact Me | All Rights Reserved</p>
+  </footer>
+</div>
 
 <script>
   document.getElementById('contactForm').addEventListener('submit', async function (e) {
